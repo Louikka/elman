@@ -38,7 +38,7 @@
   },
   "include": [
     "./src/**/*"
-, "src/lib.test.ts", "src/lib.ts"  ],
+  ],
   "exclude": [
     "./src/**/*.test.ts",
     "./src/**/*.spec.ts"

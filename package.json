@@ -17,8 +17,7 @@
   },
   "scripts": {
     "build": "tsdown",
-    "dev": "tsdown --watch",
-    "prepare": "npm run build"
+    "dev": "tsdown --watch"
   },
   "devDependencies": {
     "tsdown": "^0.22.14",
