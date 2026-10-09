@@ -8,7 +8,7 @@ This library provides two main objects: [`Manager`](./src/index.ts#Manager) and 
 
 ## Example
 
-One of the most obvious use-cases is adding a callback to the with video (or audio) element `currentTime` property:
+One of the most obvious use-cases is adding a callback to the video (or audio) element `currentTime` property:
 
 ```js
 const manager = new Manager();
