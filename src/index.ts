@@ -1,9 +1,7 @@
-import { isTimeInTimeframe, type Timeframe } from './lib/lib';
+import { isTimeInTimeframe, type Timeframe } from './lib';
 
 
-//#region ManagedElement
-
-export class ManagedElement
+export class ManagerElement
 {
     /**
      * @param e element that should be displayed on canvas.
@@ -63,53 +61,20 @@ export class ManagedElement
     }
 }
 
-//#endregion
 
-
-//#region Manager
-
+/**
+ * Base class containing all core functionality.
+ */
 export class Manager
 {
-    constructor()
-    {
-        //
-    }
-
-
-    public readonly elements: ManagedElement[] = [];
-
-    private _counter: number = 0;
-    public get counter()
-    {
-        return this._counter;
-    }
-    public set counter(v)
-    {
-        this._counter = v;
-        this.updateElements(v);
-    }
-
-    protected updateElements(counter: number)
-    {
-        for (const ce of this.elements)
-        {
-            if (ce.shouldDisplay(counter))
-            {
-                ce.mount();
-            }
-            else
-            {
-                ce.unmount();
-            }
-        }
-    }
+    public readonly elements: ManagerElement[] = [];
 
     /**
      * Adds an element to the elements collection.
      */
-    public add(ce: ManagedElement)
+    public add(e: ManagerElement)
     {
-        this.elements.push(ce);
+        this.elements.push(e);
     }
 
     // /**
@@ -134,75 +99,32 @@ export class Manager
      */
     public removeAll()
     {
-        for (const ce of this.elements)
+        for (const e of this.elements)
         {
-            ce.unmount();
+            e.unmount();
         }
 
         this.elements.length = 0;
     }
-}
-
-//#endregion
-
-
-//#region Controller
-
-export interface ControllerOptions {
-    step?: number;
-}
-
-export class Controller
-{
-    constructor(m: Manager, options: ControllerOptions = {})
-    {
-        this.m = m;
-        this.step = options.step ?? 1;
-    }
-
-
-    private readonly m: Manager;
-    public step: number;
 
     /**
-     * Increments {@link Manager.counter} by {@link Controller.step}.
+     * Mounts or unmounts elements from {@link Manager.elements} based on the
+     * `t` parameter.
+     *
+     * @param t time against which elements are being tested.
      */
-    public inc()
+    public updateElements(t: number)
     {
-        this.m.counter += this.step;
-    }
-
-    /**
-     * Decrements {@link Manager.counter} by {@link Controller.step}.
-     */
-    public dec()
-    {
-        this.m.counter -= this.step;
-    }
-
-    /**
-     * Adds `v` to the {@link Manager.counter}.
-     */
-    public add(v: number)
-    {
-        this.m.counter += v;
-    }
-
-    /**
-     * Substracts `v` from the {@link Manager.counter}.
-     */
-    public sub(v: number)
-    {
-        this.m.counter -= v;
-    }
-
-    /**
-     * Sets {@link Manager.counter} to `v`.
-     */
-    public set(v: number)
-    {
-        this.m.counter = v;
+        for (const e of this.elements)
+        {
+            if (e.shouldDisplay(t))
+            {
+                e.mount();
+            }
+            else
+            {
+                e.unmount();
+            }
+        }
     }
 }
-
-//#endregion
