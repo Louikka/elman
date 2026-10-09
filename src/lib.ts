@@ -45,3 +45,9 @@ export function isTimeInTimeframe(t: number, frame: Timeframe): boolean
     const f = normaliseTimeframe(frame);
     return t >= f.start && t < f.end;
 }
+
+
+export function simpleUUID(): string
+{
+    return Math.random().toString(36).substring(2, 10);
+}

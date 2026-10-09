@@ -1,4 +1,4 @@
-import { isTimeInTimeframe, type Timeframe } from './lib';
+import { isTimeInTimeframe, simpleUUID, type Timeframe } from './lib';
 
 
 export class ManagerElement
@@ -7,17 +7,24 @@ export class ManagerElement
      * @param e element that should be displayed on canvas.
      * @param parent parent element to which this element should be mounted to.
      * @param tf timings to display element (see {@link Timeframe}).
+     * @param id optional element ID.
      */
-    constructor(e: HTMLElement, parent: HTMLElement, tf: Timeframe | Timeframe[])
+    constructor(e: HTMLElement, parent: HTMLElement, tf: Timeframe | Timeframe[], id: string = simpleUUID())
     {
         this.e = e;
         this.parent = parent;
+
+        this.id = id;
+
         this.tf = tf;
     }
 
 
     public readonly e: HTMLElement;
     public parent: HTMLElement;
+
+    public readonly id: string;
+
     /** Display timing. */
     public tf: Timeframe | Timeframe[];
 
@@ -77,25 +84,27 @@ export class Manager
         this.elements.push(e);
     }
 
-    // /**
-    //  * Removes an element with specified query selector from the elements collection.
-    //  */
-    // public remove(query: string)
-    // {
-    //     const i = this.elements.findIndex(e => e.id === id);
-    //     if (i > -1)
-    //     {
-    //         this.elements[i]?.e.remove();
-    //         this.elements.splice(i, 1);
-    //     }
-    //     else
-    //     {
-    //         console.warn(`Cannot find element with id "${id}".`);
-    //     }
-    // }
+    /**
+     * Removes an element from the elements collection by its ID.
+     */
+    public remove(id: string)
+    {
+        const i = this.elements.findIndex(e => e.id === id);
+        if (i > -1)
+        {
+            const e = this.elements[i]!;
+
+            e.unmount();
+            this.elements.splice(i, 1);
+        }
+        else
+        {
+            console.warn(`Cannot find element with id "${id}".`);
+        }
+    }
 
     /**
-     * Removes all elements from the canvas elements collection.
+     * Removes all elements from the elements collection.
      */
     public removeAll()
     {
