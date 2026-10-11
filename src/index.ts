@@ -29,6 +29,14 @@ export class ManagerElement
     public tf: Timeframe | Timeframe[];
 
     /**
+     * Checks if element is currently attached to the parent.
+     */
+    public isMounted(): boolean
+    {
+        return this.parent.contains(this.e);
+    }
+
+    /**
      * Mounts element to the parent. If already mounted, does nothing.
      */
     public mount()
