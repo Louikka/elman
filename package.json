@@ -17,9 +17,12 @@
   },
   "scripts": {
     "build": "tsdown",
-    "dev": "tsdown --watch"
+    "dev": "tsdown --watch",
+    "test": "vitest --environment=jsdom",
+    "prepare": "npm run build"
   },
   "devDependencies": {
+    "jsdom": "^29.1.1",
     "tsdown": "^0.22.14",
     "typescript": "^7.0.2",
     "vitest": "^4.1.11"

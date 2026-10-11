@@ -34,13 +34,9 @@
     "isolatedModules": true,
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "include": [
-    "./src/**/*"
-  ],
-  "exclude": [
-    "./src/**/*.test.ts",
-    "./src/**/*.spec.ts"
+    "./src"
   ]
 }
