@@ -87,7 +87,22 @@ export class ManagerElement
  */
 export class Manager
 {
+    constructor(...elements: ManagerElement[])
+    {
+        this.elements.push(...elements);
+    }
+
+
     public readonly elements: ManagerElement[] = [];
+
+    /**
+     * Returns the first element in the elements collection with specified ID,
+     * or `undefined` if no elements with such ID was found.
+     */
+    public find(id: string): ManagerElement | undefined
+    {
+        return this.elements.find(e => e.id === id);
+    }
 
     /**
      * Adds an element to the elements collection.
