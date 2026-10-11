@@ -2,9 +2,9 @@
 
 This library provides two main objects: [`Manager`](./src/index.ts#Manager) and [`ManagerElement`](./src/index.ts#ManagerElement).
 
-`ManagerElement` is just a simple wrapper over `HTMLElement`, meaning it can be any element. `ManagerElement` also requires a parent element provided to which the element itself should be attached.
+`ManagerElement` is just a simple wrapper over `HTMLElement`, meaning it can hold any element. `ManagerElement` also requires a parent element provided to which the element itself will be attached.
 
-`Manager` is a main object that manages added to it `ManagerElement`s, primarily via [`updateElements`](./src/index.ts#Manager.updateElements) method. This method accepts a number that being tested against `ManagerElement.tf` timeframe: if that number is in the timeframe, element being diplayed.
+`Manager` is a main object that manages `ManagerElement`s, primarily via [`updateElements`](./src/index.ts#Manager.updateElements) method. This method accepts a number that being tested against `ManagerElement.tf` timeframe: if that number is in the timeframe, element being diplayed.
 
 ## Example
 
