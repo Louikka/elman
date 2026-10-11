@@ -1,4 +1,9 @@
-import { isTimeInTimeframe, simpleUUID, type Timeframe } from './lib';
+import { simpleUUID } from './lib';
+import { type Timeframe, isTimeInTimeframe } from './timeframe';
+
+export {
+    type Timeframe,
+};
 
 
 export class ManagerElement
